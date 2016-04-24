@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
 //   res.send('Error, wrong validation token');
 // })
 
-var token = "CAAWpWI0sZCVgBAFuQ5jfJZAD9lV1B9tby8Bxup1PLIvyF94jYo4tMNXGQAygZAYomcldqotSI2X1JOBLwnV3kkal1yrkDH1SCecUN0R5dOIVaxr2hVBZBvaJPTcYNQ6MqmAHVeSIkEC7222sgex31viJmgPR9MZAyXtyNiPoQbHSo7LHchOLgFcgzRPQ0wSjW0ZA6yJ1vPtAZDZD";
+var token = "CAAWpWI0sZCVgBAMT9qDFSANk5b4ARH7YefKtucrEevhr106gaZBEeVO4zoFpmjNwWher3WAZApn040VVWNb45n0EHedZAPDkJEUGmUpp69PZCsiMGj6H5xWV6TopfROsexdw7zngKEKZA4BcsV4873HgiT4VOGU2VbwgmyuuuG8vvaH8hWFfLOyDmAnHQQBLY48MxqQAqjmQZDZD";
 
 function sendTextMessage(sender, text) {
   messageData = {
