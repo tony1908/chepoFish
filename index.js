@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
 //   res.send('Error, wrong validation token');
 // })
 
-var token = "CAAWpWI0sZCVgBAMT9qDFSANk5b4ARH7YefKtucrEevhr106gaZBEeVO4zoFpmjNwWher3WAZApn040VVWNb45n0EHedZAPDkJEUGmUpp69PZCsiMGj6H5xWV6TopfROsexdw7zngKEKZA4BcsV4873HgiT4VOGU2VbwgmyuuuG8vvaH8hWFfLOyDmAnHQQBLY48MxqQAqjmQZDZD";
+var token = "CAALotjk1ok4BAIGmtpOyAbU7dI7HyR2EiWva3FGKMts26ZAAFezupvqBIOJ1srOIsWad2ZCi0LUlPTpFuKFhFxWPq9fAUgeprDd9mdvPOag9qAxyFvZBiJtmyfSWL16u7QL5rdWv1i6ZClXtWVmwPZBEK6S2IdzNc3okzdK7Sr8jG86fjGtlG2QX3zzZAGF3vNbwkpEsumgwZDZD";
 
 function sendTextMessage(sender, text) {
   messageData = {
@@ -49,13 +49,68 @@ app.post('/webhook/', jsonParser,  function (req, res) {
     if (event.message && event.message.text) {
       text = event.message.text;
       console.log()
-      sendTextMessage(sender, "Bienvenido a fish Bot");
+      if (text === 'hola') {
+        sendTextMessage(sender, "Hola amigox");
+      } else {
+        // sendTextMessage(sender, "Holaxxxxx");
+        sendGenericMessage(sender);
+        continue;
+      }
       // Handle a text message from this sender
     }
   }
   res.sendStatus(200);
 });
 
+
+function sendGenericMessage(sender) {
+  messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "First card",
+          "subtitle": "Element #1 of an hscroll",
+          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "buttons": [{
+            "type": "web_url",
+            "url": "https://www.messenger.com/",
+            "title": "Web url"
+          }, {
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Payload for first element in a generic bubble",
+          }],
+        },{
+          "title": "Second card",
+          "subtitle": "Element #2 of an hscroll",
+          "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+          "buttons": [{
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Payload for second element in a generic bubble",
+          }],
+        }]
+      }
+    }
+  };
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
+}
 
 
 
