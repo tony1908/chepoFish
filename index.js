@@ -10,12 +10,12 @@ app.get('/', function (req, res) {
   res.json({ version: packageInfo.version });
 });
 
-app.get('/webhook/', function (req, res) {
-  if (req.query['hub.verify_token'] === 'token_prueba') {
-    res.send(req.query['hub.challenge']);
-  }
-  res.send('Error, wrong validation token');
-})
+// app.get('/webhook/', function (req, res) {
+//   if (req.query['hub.verify_token'] === 'token_prueba') {
+//     res.send(req.query['hub.challenge']);
+//   }
+//   res.send('Error, wrong validation token');
+// })
 
 var token = "CAAWpWI0sZCVgBAFuQ5jfJZAD9lV1B9tby8Bxup1PLIvyF94jYo4tMNXGQAygZAYomcldqotSI2X1JOBLwnV3kkal1yrkDH1SCecUN0R5dOIVaxr2hVBZBvaJPTcYNQ6MqmAHVeSIkEC7222sgex31viJmgPR9MZAyXtyNiPoQbHSo7LHchOLgFcgzRPQ0wSjW0ZA6yJ1vPtAZDZD";
 
